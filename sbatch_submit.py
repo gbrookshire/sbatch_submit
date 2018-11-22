@@ -15,7 +15,6 @@ def main():
     template = ''.join(template)
 
     args = [['n', 'ntasks', 'Number of tasks', 1, {}],
-            ['k', 'nodes', 'Number of nodes', 1, {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
@@ -35,7 +34,7 @@ def main():
     args = parser.parse_args()
 
     # Replace the parameters in the sbatch script
-    for arg in ['ntasks', 'nodes', 'time', 'mem', 'qos', 'input']:
+    for arg in ['ntasks', 'time', 'mem', 'qos', 'input']:
         template = template.replace('_' + arg, str(getattr(args, arg)))
 
     # Write a temporary sbatch script

@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --ntasks _ntasks
-#SBATCH --nodes _nodes
 #SBATCH --time _time
 #SBATCH --mem _mem
 #SBATCH --qos _qos
