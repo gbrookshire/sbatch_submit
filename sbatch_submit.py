@@ -4,13 +4,15 @@
 Submit a batch job to SLURM on BlueBear.
 """
 
+import os
 import subprocess
 import tempfile
 import argparse
 
 def main():
     # Read in the template file
-    with open('sbatch_template.sh') as f:
+    lib_dir = os.path.dirname(os.path.realpath(__file__))
+    with open(lib_dir + '/sbatch_template.sh') as f:
         template = f.readlines()
     template = ''.join(template)
 
@@ -46,4 +48,4 @@ def main():
 
 
 if __name__ == "__main__":
-   main()
+    main()
