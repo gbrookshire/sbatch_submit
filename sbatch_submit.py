@@ -16,17 +16,20 @@ def main():
         template = f.readlines()
     template = ''.join(template)
 
+    # Make the arg parser
+    desc = 'Submit Matlab code or scripts as Slurm jobs'
+    parser = argparse.ArgumentParser(description=desc)
+
+    # Arg specs: Short name, long name, description, default, other args
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-i', '--input', help='Code to run on Slurm')
+    group.add_argument('-f', '--file', help='Name of file to run on Slurm')
+
     args = [['n', 'ntasks', 'Number of tasks', 1, {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
-             {'choices': ['bbdefault', 'bbfast']}],
-            ['i', 'input', 'Script to run as a Slurm job', None,
-             {'required': True}]]
-
-    # Make the arg parser
-    desc = 'Submit Matlab scripts as Slurm jobs'
-    parser = argparse.ArgumentParser(description=desc)
+             {'choices': ['bbdefault', 'bbfast']}]]
     for arg in args:
         parser.add_argument('-' + arg[0],
                             '--' + arg[1],
@@ -35,15 +38,22 @@ def main():
                             **arg[4])
     args = parser.parse_args()
 
-    # Replace the parameters in the sbatch script
-    for arg in ['ntasks', 'time', 'mem', 'qos', 'input']:
+    # Replace the Slurm parameters in the sbatch script
+    for arg in ['ntasks', 'time', 'mem', 'qos']:
         template = template.replace('_' + arg, str(getattr(args, arg)))
+
+    # Invoke the code or script
+    if args.input is not None:
+        msg = "'{}'".format(args.input)
+    elif args.file is not None:
+        msg = '< {}'.format(args.file)
+    template = template.replace('_input', msg)
 
     # Write a temporary sbatch script
     tf = tempfile.NamedTemporaryFile()
     tf.writelines(template)
 
-    # Run the job
+     Run the job
     p = subprocess.call('sbatch ' + temp_filename, shell=True)
 
 
