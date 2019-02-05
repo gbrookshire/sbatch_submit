@@ -53,7 +53,7 @@ def main():
     tf = tempfile.NamedTemporaryFile()
     tf.writelines(template)
 
-     Run the job
+    # Run the job
     p = subprocess.call('sbatch ' + temp_filename, shell=True)
 
 
