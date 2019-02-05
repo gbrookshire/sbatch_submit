@@ -17,7 +17,7 @@ def main():
     template = ''.join(template)
 
     # Make the arg parser
-    desc = 'Submit Matlab code or scripts as Slurm jobs'
+    desc = 'Submit Matlab code or script as a Slurm job'
     parser = argparse.ArgumentParser(description=desc)
 
     # Arg specs: Short name, long name, description, default, other args
