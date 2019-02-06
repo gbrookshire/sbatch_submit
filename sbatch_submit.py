@@ -46,11 +46,11 @@ def main():
     if args.input is not None:
         # This is specific to my startup script
         startup = 'run /rds/homes/b/brookshg/startup.m'
-        msg = "'{}, {}, quit'".format(startup, args.input)
+        msg = ''' "{}, {}, quit" '''.format(startup, args.input)
     elif args.file is not None:
         msg = '< {}'.format(args.file)
     template = template.replace('_input', msg)
-
+    
     # Write a temporary sbatch script
     tf = tempfile.NamedTemporaryFile()
     tf.writelines(template)
