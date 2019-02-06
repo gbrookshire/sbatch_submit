@@ -3,6 +3,7 @@
 #SBATCH --time _time
 #SBATCH --mem _mem
 #SBATCH --qos _qos
+#SBATCH --error=slurm-%j.err
 
 #### This template is filled in by sbatch_submit.py
 
