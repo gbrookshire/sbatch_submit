@@ -29,7 +29,7 @@ def main():
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
-             {'choices': ['bbdefault', 'bbfast']}]]
+             {'choices': ['bbdefault', 'bbshort']}]]
     for arg in args:
         parser.add_argument('-' + arg[0],
                             '--' + arg[1],

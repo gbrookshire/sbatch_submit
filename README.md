@@ -16,6 +16,6 @@ optional arguments:
                         Number of tasks
   -t TIME, --time TIME  Maximum time to let the job run
   -m MEM, --mem MEM     Memory allocation
-  -q {bbdefault,bbfast}, --qos {bbdefault,bbfast}
+  -q {bbdefault,bbfast}, --qos {bbdefault,bbshort}
                         Select a QOS on BlueBear
 ```
