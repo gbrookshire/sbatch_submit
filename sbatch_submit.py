@@ -44,7 +44,7 @@ def main():
 
     # Invoke the code or script
     if args.input is not None:
-        msg = "'{}'".format(args.input)
+        msg = "'{}, quit'".format(args.input)
     elif args.file is not None:
         msg = '< {}'.format(args.file)
     template = template.replace('_input', msg)
@@ -52,9 +52,10 @@ def main():
     # Write a temporary sbatch script
     tf = tempfile.NamedTemporaryFile()
     tf.writelines(template)
+    tf.flush()
 
     # Run the job
-    p = subprocess.call('sbatch ' + temp_filename, shell=True)
+    p = subprocess.call('sbatch ' + tf.name, shell=True)
 
 
 if __name__ == "__main__":
