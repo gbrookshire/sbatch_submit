@@ -44,7 +44,9 @@ def main():
 
     # Invoke the code or script
     if args.input is not None:
-        msg = "'{}, quit'".format(args.input)
+        # This is specific to my startup script
+        startup = 'run /rds/homes/b/brookshg/startup.m'
+        msg = "'{}, {}, quit'".format(startup, args.input)
     elif args.file is not None:
         msg = '< {}'.format(args.file)
     template = template.replace('_input', msg)
