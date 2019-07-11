@@ -22,8 +22,8 @@ def main():
 
     # Arg specs: Short name, long name, description, default, other args
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('-i', '--input', help='Code to run on Slurm')
-    group.add_argument('-f', '--file', help='Name of file to run on Slurm')
+    group.add_argument('-i', '--input', help='Matlab code to run (use -i or -f but not both!)')
+    group.add_argument('-f', '--file', help='Path to Matlab file to run')
 
     args = [['n', 'ntasks', 'Number of tasks', 1, {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],

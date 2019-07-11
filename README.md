@@ -1,21 +1,22 @@
 # sbatch_submit
-Helper function to submit jobs on Slurm
+Helper script to submit jobs on Slurm
+
 
 ```
 usage: sbatch_submit.py [-h] (-i INPUT | -f FILE) [-n NTASKS] [-t TIME]
-                        [-m MEM] [-q {bbdefault,bbfast}]
+                        [-m MEM] [-q {bbdefault,bbshort}]
 
-Submit Matlab code or scripts as a Slurm job
+Submit Matlab code or script as a Slurm job
 
 optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        Code to run on Slurm
-  -f FILE, --file FILE  Name of file to run on Slurm
+                        Matlab code to run (use -i or -f but not both!)
+  -f FILE, --file FILE  Path to Matlab file to run
   -n NTASKS, --ntasks NTASKS
                         Number of tasks
   -t TIME, --time TIME  Maximum time to let the job run
   -m MEM, --mem MEM     Memory allocation
-  -q {bbdefault,bbfast}, --qos {bbdefault,bbshort}
-                        Select a QOS on BlueBear
+  -q {bbdefault,bbshort}, --qos {bbdefault,bbshort}
+                        Select a QOS on BlueBear 
 ```
