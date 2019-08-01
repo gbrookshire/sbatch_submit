@@ -6,7 +6,7 @@ Change the variable `matlab_startup` in `sbatch_submit.py` to point to your `sta
 
 ## Example
 ```
-sbatch_submit.py "my_analysis_func(1, 'some_arg')" -t 5:0 -m 20G
+sbatch_submit.py -i "my_analysis_func.m(1, 'some_arg')" -t 5:0 -m 20G
 ```
 
 ## Options
