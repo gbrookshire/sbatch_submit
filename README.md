@@ -1,7 +1,15 @@
 # sbatch_submit
-Helper script to submit jobs on Slurm
+Helper script to submit Slurm jobs on Bluebear
 
+## Important
+Change the variable `matlab_startup` in `sbatch_submit.py` to point to your `startup.m` file.
 
+## Example
+```
+sbatch_submit.py "my_analysis_func(1, 'some_arg')" -t 5:0 -m 20G
+```
+
+## Options
 ```
 usage: sbatch_submit.py [-h] (-i INPUT | -f FILE) [-n NTASKS] [-t TIME]
                         [-m MEM] [-q {bbdefault,bbshort}]
