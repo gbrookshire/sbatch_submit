@@ -9,6 +9,9 @@ import subprocess
 import tempfile
 import argparse
 
+# Where is your matlab startup script?
+matlab_startup = '/rds/homes/b/brookshg/startup.m'
+
 def main():
     # Read in the template file
     lib_dir = os.path.dirname(os.path.realpath(__file__))
@@ -45,7 +48,7 @@ def main():
     # Invoke the code or script
     if args.input is not None:
         # This is specific to my startup script
-        startup = 'run /rds/homes/b/brookshg/startup.m'
+        startup = 'run ' + matlab_startup
         msg = ''' "{}, {}, quit" '''.format(startup, args.input)
     elif args.file is not None:
         msg = '< {}'.format(args.file)
