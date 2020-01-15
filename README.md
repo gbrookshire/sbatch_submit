@@ -23,7 +23,7 @@ Replace `run tests/test.m` with the code you want to run.
 ```
 python_load='source <PATH/TO/load_python.sh>'
 python_call='python tests/test.py'
-./sbatch_submit.py -i "$python_call" -s "./python_setup.sh" -t 5:0 -m 10G
+./sbatch_submit.py -i "$python_call" -s "$python_load" -t 5:0 -m 10G
 ```
 
 Replace `tests/test.py` with the script you want to run.
