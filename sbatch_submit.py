@@ -9,9 +9,6 @@ import subprocess
 import tempfile
 import argparse
 
-# Where is your matlab startup script?
-matlab_startup = '/rds/homes/b/brookshg/startup.m'
-
 def main():
     # Read in the template file
     lib_dir = os.path.dirname(os.path.realpath(__file__))
@@ -20,19 +17,19 @@ def main():
     template = ''.join(template)
 
     # Make the arg parser
-    desc = 'Submit Matlab code or script as a Slurm job'
+    desc = 'Submit code as a Bluebear job'
     parser = argparse.ArgumentParser(description=desc)
 
     # Arg specs: Short name, long name, description, default, other args
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('-i', '--input', help='Matlab code to run (use -i or -f but not both!)')
-    group.add_argument('-f', '--file', help='Path to Matlab file to run')
-
-    args = [['n', 'ntasks', 'Number of tasks', 1, {}],
+    args = [['i', 'input', 'Shell command to run', None, {'required': True}],
+            ['s', 'setup', 'Shell command to set up the environment', ':',
+             {}],
+            ['n', 'ntasks', 'Number of tasks', '1', {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
              {'choices': ['bbdefault', 'bbshort']}]]
+    argnames = [a[1] for a in args]
     for arg in args:
         parser.add_argument('-' + arg[0],
                             '--' + arg[1],
@@ -42,25 +39,17 @@ def main():
     args = parser.parse_args()
 
     # Replace the Slurm parameters in the sbatch script
-    for arg in ['ntasks', 'time', 'mem', 'qos']:
-        template = template.replace('_' + arg, str(getattr(args, arg)))
-
-    # Invoke the code or script
-    if args.input is not None:
-        # This is specific to my startup script
-        startup = 'run ' + matlab_startup
-        msg = ''' "{}, {}, quit" '''.format(startup, args.input)
-    elif args.file is not None:
-        msg = '< {}'.format(args.file)
-    template = template.replace('_input', msg)
+    for argname in argnames:
+        template = template.replace('_' + argname, getattr(args, argname))
     
     # Write a temporary sbatch script
-    tf = tempfile.NamedTemporaryFile()
+    tf = tempfile.NamedTemporaryFile(mode='w')
     tf.writelines(template)
     tf.flush()
 
     # Run the job
     p = subprocess.call('sbatch ' + tf.name, shell=True)
+    #####p = subprocess.call('cat ' + tf.name, shell=True)
 
 
 if __name__ == "__main__":

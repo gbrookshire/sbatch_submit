@@ -12,7 +12,6 @@
 set -e
 
 module purge; module load bluebear
-module load apps/matlab/r2017a
-
-matlab -nodisplay -r _input
+_setup
+_input
 

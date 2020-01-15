@@ -1,30 +1,46 @@
 # sbatch_submit
-Helper script to submit Slurm jobs on Bluebear
+This script makes it easier to submit Slurm jobs on Bluebear.
 
-## Important
-Change the variable `matlab_startup` in `sbatch_submit.py` to point to your `startup.m` file.
+## Setting up the environment and loading libraries
+Set up the shell environment using the '--setup' argument.
+E.g. `./path/to/setup_script.sh`.
 
-## Example
+## Examples
+Make sure to preserve all quotes!
+Anything inside triangle brackets `<...>` is code that should be replaced with your specific calls.
+
+### Matlab
 ```
-sbatch_submit.py -i "my_analysis_func.m(1, 'some_arg')" -t 5:0 -m 20G
+matlab_load='module load apps/matlab/r2017a'
+matlab_startup='run <PATH/TO/startup.m>' # Your Matlab startup script
+matlab_call="matlab -nodisplay -r \"$matlab_startup, run tests/test.m, quit\" "
+./sbatch_submit.py -i "$matlab_call" -s "$matlab_load" -t 5:0 -m 10G
 ```
+
+Replace `run tests/test.m` with the code you want to run.
+
+### Python
+```
+python_load='source <PATH/TO/load_python.sh>'
+python_call='python tests/test.py'
+./sbatch_submit.py -i "$python_call" -s "./python_setup.sh" -t 5:0 -m 10G
+```
+
+Replace `tests/test.py` with the script you want to run.
+
 
 ## Options
 ```
-usage: sbatch_submit.py [-h] (-i INPUT | -f FILE) [-n NTASKS] [-t TIME]
-                        [-m MEM] [-q {bbdefault,bbshort}]
-
-Submit Matlab code or script as a Slurm job
-
-optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        Matlab code to run (use -i or -f but not both!)
-  -f FILE, --file FILE  Path to Matlab file to run
+                        Shell command to run
+  -s SETUP, --setup SETUP
+                        Shell command to set up the environment
   -n NTASKS, --ntasks NTASKS
                         Number of tasks
   -t TIME, --time TIME  Maximum time to let the job run
   -m MEM, --mem MEM     Memory allocation
   -q {bbdefault,bbshort}, --qos {bbdefault,bbshort}
-                        Select a QOS on BlueBear 
+                        Select a QOS on BlueBear
+
 ```
