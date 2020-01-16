@@ -1,5 +1,6 @@
 # sbatch_submit
 This script makes it easier to submit Slurm jobs on Bluebear.
+Make sure this script is available to the shell by setting it as an executable and ensuring it is in the search path.
 
 ## Setting up the environment and loading libraries
 Set up the shell environment using the '--setup' argument.
@@ -14,7 +15,7 @@ Anything inside triangle brackets `<...>` is code that should be replaced with y
 matlab_load='module load apps/matlab/r2017a'
 matlab_startup='run <PATH/TO/startup.m>' # Your Matlab startup script
 matlab_call="matlab -nodisplay -r \"$matlab_startup, run tests/test.m, quit\" "
-./sbatch_submit.py -i "$matlab_call" -s "$matlab_load" -t 5:0 -m 10G
+sbatch_submit.py -i "$matlab_call" -s "$matlab_load" -t 5:0 -m 10G
 ```
 
 Replace `run tests/test.m` with the code you want to run.
@@ -23,7 +24,7 @@ Replace `run tests/test.m` with the code you want to run.
 ```
 python_load='source <PATH/TO/load_python.sh>'
 python_call='python tests/test.py'
-./sbatch_submit.py -i "$python_call" -s "$python_load" -t 5:0 -m 10G
+sbatch_submit.py -i "$python_call" -s "$python_load" -t 5:0 -m 10G
 ```
 
 Replace `tests/test.py` with the script you want to run.
