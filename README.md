@@ -32,16 +32,24 @@ Replace `tests/test.py` with the script you want to run.
 
 ## Options
 ```
+usage: sbatch_submit.py [-h] -i INPUT [-s SETUP] [-n NTASKS] [-o NODES]
+                        [-c CPUS] [-t TIME] [-m MEM] [-q {bbdefault,bbshort}]
+
+Submit code as a Bluebear job
+
+optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        Shell command to run
+                        Shell cmd to run
   -s SETUP, --setup SETUP
-                        Shell command to set up the environment
+                        Shell cmd that sets up the environment
   -n NTASKS, --ntasks NTASKS
                         Number of tasks
+  -o NODES, --nodes NODES
+                        Number of nodes
+  -c CPUS, --cpus CPUS  Number of CPUs per task
   -t TIME, --time TIME  Maximum time to let the job run
   -m MEM, --mem MEM     Memory allocation
   -q {bbdefault,bbshort}, --qos {bbdefault,bbshort}
                         Select a QOS on BlueBear
-
 ```
