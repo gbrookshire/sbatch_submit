@@ -1,5 +1,7 @@
 #!/bin/bash
+#SBATCH --nodes _nodes
 #SBATCH --ntasks _ntasks
+#SBATCH --cpus-per-task _cpus
 #SBATCH --time _time
 #SBATCH --mem _mem
 #SBATCH --qos _qos

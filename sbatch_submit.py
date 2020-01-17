@@ -12,7 +12,7 @@ import argparse
 def main():
     # Read in the template file
     lib_dir = os.path.dirname(os.path.realpath(__file__))
-    with open(lib_dir + '/sbatch_template.sh') as f:
+    with open(lib_dir + '/_sbatch_template.sh') as f:
         template = f.readlines()
     template = ''.join(template)
 
@@ -21,10 +21,11 @@ def main():
     parser = argparse.ArgumentParser(description=desc)
 
     # Arg specs: Short name, long name, description, default, other args
-    args = [['i', 'input', 'Shell command to run', None, {'required': True}],
-            ['s', 'setup', 'Shell command to set up the environment', ':',
-             {}],
+    args = [['i', 'input', 'Shell cmd to run', None, {'required': True}],
+            ['s', 'setup', 'Shell cmd that sets up the environment', ':', {}],
             ['n', 'ntasks', 'Number of tasks', '1', {}],
+            ['o', 'nodes', 'Number of nodes', '1', {}],
+            ['c', 'cpus', 'Number of CPUs per task', '1', {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
