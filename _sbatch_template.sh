@@ -5,7 +5,9 @@
 #SBATCH --time _time
 #SBATCH --mem _mem
 #SBATCH --qos _qos
-#SBATCH --error=slurm-%j.err
+#SBATCH --error _dir/slurm-%j.err
+#SBATCH --output _dir/slurm-%j.out
+
 
 ##################################################
 # This template is filled in by sbatch_submit.py #

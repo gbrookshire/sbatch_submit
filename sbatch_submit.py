@@ -28,6 +28,7 @@ def main():
             ['c', 'cpus', 'Number of CPUs per task', '1', {}],
             ['t', 'time', 'Maximum time to let the job run', '5:0:0', {}],
             ['m', 'mem', 'Memory allocation', '10G', {}],
+            ['d', 'dir', 'Directory to save logfiles', '.', {}],
             ['q', 'qos', 'Select a QOS on BlueBear', 'bbdefault',
              {'choices': ['bbdefault', 'bbshort']}]]
     argnames = [a[1] for a in args]
