@@ -1,5 +1,5 @@
 # sbatch_submit
-This script makes it easier to submit Slurm jobs on Bluebear.
+This script makes it easier to submit sbatch jobs on Linux computing clusters. It's specifically tailored to use the Bluebear cluster at the University of Birmingham (UK), but could be easily adapted for other systems.
 Make sure this script is available to the shell by setting it as an executable and ensuring it is in the search path.
 
 ## Setting up the environment and loading libraries
